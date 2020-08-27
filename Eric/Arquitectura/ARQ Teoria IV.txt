@@ -1,0 +1,23 @@
+OFFSET
+La posicion a la que hace referencia la variable(direccion)
+Ej:
+3-7 ---> arreglo(valores)
+0 1 ---> posicion(offset)
+IMPRESION DEL BUFFER
+diferencia entre macro y funcion
+El macro es un copy-paste,se declara y cada vez que lo utilizas,copia ese pezado de codigo
+EVITAR FUERA DE RANGO EN SALTOS
+CMP BX,50
+JNG Otro_Letrero
+JMP OK
+Otro_Letrero:
+.
+.
+.
+.
+.
+OK:
+push: manda copias de los registros a la pila
+
+
+TURBO ASSEMBLER 

@@ -1,0 +1,123 @@
+*Registros
+
+-Registros Uso General
+Almacenar las instrucciones.Registros de 16 bits.Se puede acceder a las partes
+ax-->Acumulador--> Ah(8 bits,high)/Al(8 bits,low).Siempre se utiliza Ax como el operando principal.
+bx-->Base
+cx-->Contador
+dx-->Datos
+
+Ej:
+Ax=FD3AH
+AH=FDH
+AL=3AH
+MOV Al,05
+Ax=FD05H 
+
+-Registros de Indice:Es como un puntero.Apunta a algun sitio
+si}No se puede acceder en pedazos como los registros de uso general
+di}
+bp}Indices propios de acceso a la pila o stack
+sp}
+
+-Registros de Segmento:Acceder a porciones de memoria de 64 kbs.Es como si fuera un arreglo  Dir_absoluta:Segmento*16*Desp
+CS-->Codigo,para acceder al programa.(No usar)
+DS-->Datos.(No usar)
+ES-->Extra
+SS-->Stack o pila.(No usar)
+
+*INFORMACION GENERAL
+INT21---> Interrupcion por software 
+Polling--> Verificar si algo necesita atencion.
+Interrupcion-->Espera a que alguien necesita un servicio(pedazo de software que hace lo que se espera que haga la interrupcion).Interrumpe 
+los procesos,manda una senal al procesador para realizar el servicio.
+
+MOV AH,01 //Para leer del teclado
+INT 21H //Llamo a la funcion
+	//Retorna la tecla pulsada en Dl
+
+Las instrucciones siempre se ejecutan sobre los numeros en binario.
+1 byte=8bits
+
+*Indices para acceder a espacios de memoria Bx,Di,Si
+Ej:
+MOV AL,BUF[Bx+Di]
+	  [Bx,5]
+	  [Bx][Di] (Se suma implicitamente)
+*STRINGS(Arreglos de chars)
+
+Los caracteres se almacenan secuencialmente.Se pueden declarar de la siguiente forma
+Nombre db 'ALVARO'===> Nombre db 'A' 0
+				 'L' 1
+				 'V' 2
+				 'A' 3
+				 'R' 4
+				 'O' 5
+Si se quiere acceder a uno de los caracteres se hace de la siguiente forma:
+MOV Al,nombre[5]
+
+-Crear un arreglo vacio
+
+arreglo db 50 dup(0).50 bytes 
+arrw dw 10 dup(0).donde se reservan 10 elementos de 10 bytes
+
+*IF
+MOV AL,5
+MOV BL,7
+CMP AL,5
+JNE OK
+MOV AL,BL
+JMP KO(No tiene que cumplirse ninguna funcion)
+OK:
+KO:
+
+*Bucle o FOR
+//Imprime '1' 5 veces
+MOV Cx,5
+KO:
+MOV AH,02
+MOV DL,'1'
+INT 21H
+LOOP KO(Se compara Cx con 0 para generar el bucle).
+
+*Buffer de valores:Almacen	ar 10 valores en la variable
+MOV AH,01 
+INT 21H 
+
+BUF db 10 DUP(0) //Buffer de 10 valores
+MOV Bx,0 //Inicializo el indice
+Otro:
+    MOV AH,01 //Para leer el teclado
+    INT 21H //Llamo la funcion
+            //Retorna la tecla pulsada en Dl
+    MOV BUF[Bx],Dl Guardo el caracter tomado
+    INC Bx
+    CMP Bx,10
+    JNE Otro
+
+
+01H(con eco) lo que usted digita aparece en la pantalla 
+00H
+0aH permite entrar una cadena
+techelp==>Manual
+
+Para capturar debe ir a la consola despues de darle a F7
+F8-->COrrer el codigo completo ,pero rutina completa
+cursor y F4-->Correr hasta el punto marcado por el teclado
+
+INT21H,0aH
+El primer byte indica la cantidad de caracteres a leer
+En la segunda posicion la cantidad de caracteres que se digitaron	
+
+MOV ah,0AH(un 10)
+Lea dx,maximo     Lea manda en dx la posicion de memoria de maximo
+INT21H
+declarar buffer
+
+maximo db 100-->Arreglo de 100 caracteres
+total_real db 0
+texto db 100 dup(0)(Inicializar todas las posiciones en 0)
+Le especificamos donde se encuentra la posicion de maximo para obtenerlo todo junto (max,cant,texto 0aH)
+
+
+

@@ -1,0 +1,24 @@
+;-->Comentario
+Declaracion de variables
+Var DB 8 //Formato de 9 bytes
+    DW	//Formato  
+Siempre que se quiera sumar o restar,guardar la variabke en un registro.AL,AX-->Registro del sistema
+MOV AH,VAR //Consigo el 1er operando
+MOV AX,1000 //Asigno 
+SUB AX,AH  	// Resto al 1000 la 1A Variable
+Para imprimir en pantalla el numero en char.A traves de el numero en hexadecimal.
+Buscar tabla ascii.Por ejemplo,si queremos representar el 3,en hexadecimal es 33.
+Ej:
+	3E0
+	Sumar 30 para pasar al siguiente caracter
+	Desplazar el numero instruccion SHR ,e insertarle 000 a la derecha
+	
+ALT+F5 para mostrar en pantalla 
+
+MOV AH,02 Guardar instruccion 
+El cambio de linea es un caracter ASCII
+Las variables en el momento de la prueba se pueden modificar
+Eric Nub :v 
+
+td nombre del sketch 
+descargar sketch1
